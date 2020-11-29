@@ -6,11 +6,15 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "npm test && report --reporter=text-lcov | node ./node_modules/coveralls/bin/coveralls.js --verbose",
+    "jscoverage": "jscoverage lib lib-cov"
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "jscoverage": "^0.6.0"
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.1.0",
