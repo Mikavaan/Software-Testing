@@ -11,7 +11,7 @@
     "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "jscoverage": "jscoverage lib lib-cov",
     "cov2": "./node_modules/.bin/mocha test -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js",
-    "coveralls": "jscoverage lib && YOURPACKAGE_COVERAGE=1 nodeunit --reporter=lcov test | coveralls"
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "author": "",
   "license": "MIT",
