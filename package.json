@@ -7,11 +7,12 @@
   "scripts": {
     "start": "node app.js",
     "test": "nyc --reporter=html --reporter=text mocha",
+    "cover": "istanbul cover _mocha",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls -v",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "jscoverage": "jscoverage lib lib-cov",
-    "cov2": "./node_modules/.bin/mocha test -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls -v"
+    "cov2": "./node_modules/.bin/mocha test -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
   },
   "author": "",
   "license": "MIT",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.1.0",
+    "istanbul": "^0.4.5",
     "mocha": "^8.2.1",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^15.1.0"
