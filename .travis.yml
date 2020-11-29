@@ -4,7 +4,7 @@ node_js:
 install:
   - npm install
 script:
-  - npm test:coveralls
+  - npm test
 after_success:
   - npm run coverage
 #- ./node_modules/.bin/jscoverage lib lib-cov
