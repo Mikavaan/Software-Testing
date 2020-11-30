@@ -17,6 +17,9 @@ import divide from '../src/divide.js'
 import drop from '../src/drop.js'
 import endsWith from '../src/endsWith.js'
 import eq from '../src/eq.js'
+import every from '../src/every.js'
+import filter from '../src/filter.js'
+import get from '../src/get.js'
 
 const expect = chai.expect
 
@@ -281,4 +284,52 @@ describe('eq', () => {
     const b = { 'x': 0 }
     expect(eq(a, b)).to.equal(false);
   })
+})
+
+describe('every', () => {
+  const testCases = [
+    { name: 'test_every_some_f',
+      args: [[10, 20, 30], x => x > 10],
+      expected: false },
+    { name: 'test_every_all_t',
+      args: [[11, 20, 30], x => x > 10],
+      expected: true },
+    { name: 'test_every_empty',
+      args: [[], x => x > 10],
+      expected: true }
+  ];
+  runTestCases(every, testCases);
+})
+
+describe('filter', () => {
+  const testCases = [
+    { name: 'test_filter_some',
+      args: [[10, 20, 30, 5, 40, 20], x => x > 10],
+      expected: [20, 30, 40, 20] },
+    { name: 'test_filter_empty',
+      args: [[], x => x > 10],
+      expected: [] }
+  ];
+  runTestCases(filter, testCases);
+})
+
+describe('get', () => {
+  const testCases = [
+    { name: 'test_get_str_resolv',
+      args: [[10, 20, { 'x': 5, 'y': [6, 7] }], '2.y[1]', 'abc'],
+      expected: 7 },
+    { name: 'test_get_arr_resolv',
+      args: [[10, 20, { 'x': 5, 'y': [6, 7] }], ['2', 'y', '1'], 'abc'],
+      expected: 7 },
+    { name: 'test_get_str_no_resolv_def',
+      args: [[10, 20, { 'x': 5, 'y': [6, 7] }], '2.z', 'abc'],
+      expected: 'abc' },
+    { name: 'test_get_undef_def',
+      args: [undefined, '2.z', 'abc'],
+      expected: 'abc' },
+    { name: 'test_get_null_def',
+      args: [null, '2.z', 'abc'],
+      expected: 'abc' }
+  ];
+  runTestCases(get, testCases);
 })
