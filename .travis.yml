@@ -4,4 +4,4 @@ node_js:
 install:
 #  - cd istanbul-mocha && npm install && cd ..
 script:
-  - npm coveralls
+  - npm run coveralls
