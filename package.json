@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest --verbose --coverage",
-    "coveralls": "node --experimental-vm-modules node_modules/.bin/jest --verbose --coverage; coveralls < coverage/lcov.info"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --coverage",
+    "coveralls": "coveralls < coverage/lcov.info"
   },
   "author": "",
   "license": "MIT",
