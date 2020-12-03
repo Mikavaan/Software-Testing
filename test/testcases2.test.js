@@ -49,30 +49,36 @@ function runTestCases(f, testCases) {
   });
 }
 
-//TODO: name: 'test_isArguments_argobjes'
-describe('isArguments', () => {
-  const testCases = [
+function auxForIsArguments(a, b) {
+  return isArguments(arguments)
+  }
+
+  describe('isArguments', () => {
+    it('test_isArguments_argobjes', function() {
+      expect(auxForIsArguments(1, 2)).to.equal(true);
+    })
+
+    const testCases = [
     { name: 'test_isArguments_obj', args: [{}], expected: false},
     { name: 'test_isArguments_null', args: [null], expected: false},
     { name: 'test_isArguments_undef', args: [undefined], expected: false}
   ];
-  runTestCases(isArguments, testCases);  
+  runTestCases(isArguments, testCases);
 })
 
-//TODO: name: 'test_isArrayLike_long_str'
 describe('isArrayLike', () => {
   const testCases = [
     { name: 'test_isArrayLike_num', args: [3], expected: false},
     { name: 'test_isArrayLike_str', args: ["sana"], expected: true},
     { name: 'test_isArrayLike_bool', args: [true], expected: false},
     { name: 'test_isArrayLike_sym', args: [Symbol()], expected: false},
-    { name: 'test_isArrayLike_obj', args: [{}], expected: false}, // Expected result differs form test plan.
+    { name: 'test_isArrayLike_obj', args: [{}], expected: false}, // Expected result differs form test plan. Typo in the plan.
     { name: 'test_isArrayLike_arr', args: [[1,2,3]], expected: true},
     { name: 'test_isArrayLike_fun', args: [function(){return 7}], expected: false},
     { name: 'test_isArrayLike_null', args: [null], expected: false},
     { name: 'test_isArrayLike_undef', args: [undefined], expected: false}
   ];
-  runTestCases(isArrayLike, testCases);  
+  runTestCases(isArrayLike, testCases);
 })
 
 describe('isArrayLikeObject', () => {
@@ -92,9 +98,9 @@ describe('isBoolean', () => {
   runTestCases(isBoolean, testCases);  
 })
 
-//TODO: name: 'test_isBuffer_buf'
 describe('isBuffer', () => {
   const testCases = [
+    { name: 'test_isBuffer_buf', args: [new Buffer(2)], expected: true},
     { name: 'test_isBuffer_num', args: [3], expected: false},
     { name: 'test_isBuffer_str', args: ["sana"], expected: false},
     { name: 'test_isBuffer_bool', args: [true], expected: false},
@@ -104,9 +110,10 @@ describe('isBuffer', () => {
     { name: 'test_isBuffer_typearr', args: [new Int16Array], expected: false},
     { name: 'test_isBuffer_fun', args: [function() { return 7 }], expected: false},
     { name: 'test_isBuffer_null', args: [null], expected: false},
-    { name: 'test_isBuffer_undef', args: [undefined], expected: false}
+    { name: 'test_isBuffer_undef', args: [undefined], expected: false},
+    { name: 'test_isBuffer_buf_modern', args: [Buffer.alloc(2)], expected: true}
   ];
-  runTestCases(isBuffer, testCases);  
+  runTestCases(isBuffer, testCases);
 })
 
 describe('isDate', () => {
@@ -117,8 +124,6 @@ describe('isDate', () => {
   runTestCases(isDate, testCases);  
 })
 
-//TODO: { name: 'test_isEmpty_buf', args: [new Buffer(2)], expected: false},
-//TODO: { name: 'test_isEmpty_emp_buf', args: [new Buffer(0)], expected: true},
 describe('isEmpty', () => {
   const testCases = [
     { name: 'test_isEmpty_null', args: [null], expected: true},
@@ -134,6 +139,8 @@ describe('isEmpty', () => {
     { name: 'test_isEmpty_emp_map', args: [new Map()], expected: true},
     { name: 'test_isEmpty_set', args: [new Set(["eka"])], expected: false},
     { name: 'test_isEmpty_emp_set', args: [new Set()], expected: true},
+    { name: 'test_isEmpty_buf', args: [new Buffer(2)], expected: false},
+    { name: 'test_isEmpty_emp_buf', args: [new Buffer(0)], expected: true},
     { name: 'test_isEmpty_num', args: [3], expected: true},
     { name: 'test_isEmpty_bool', args: [true], expected: true},
     { name: 'test_isEmpty_sym', args: [Symbol()], expected: true},
@@ -223,8 +230,6 @@ describe('keys', () => {
   runTestCases(keys, testCases);  
 })
 
-//TODO: test_map_long_arr
-//TODO: test_map_long_arr_plus
 describe('map', () => {
   const testCases = [
     { name: 'test_map_norm', args: [[4, 8], function(n) {return n * n}], expected: [16, 64]},
@@ -234,9 +239,6 @@ describe('map', () => {
   runTestCases(map, testCases);  
 })
 
-//TODO: test_slice_long_arr_first
-//TODO: test_slice_long_arr_last
-//TODO: test_slice_long_arr_plus
 describe('slice', () => {
   const testCases = [
     { name: 'test_slice_norm', args: [[1, 2, 3, 4, 5, 6], 2, 4], expected: [3, 4]},
@@ -294,7 +296,6 @@ describe('toNumber', () => {
   runTestCases(toNumber, testCases);  
 })
 
-//TODO: Tarkista olisiko näihin paremi vertailu korvaamaan to.deep.equal
 describe('toString', () => {
   const testCases = [
     { name: 'test_toString_num', args: [3], expected: "3"},
