@@ -146,7 +146,7 @@ describe('compact', () => {
     { name: 'test_compact_all_fal',
       args: [[10, 20, false, null, 0, "", undefined, NaN, 30]],
       expected: [10, 20, 30] },
-    { name: 'test_compact_all_no_fal',
+    { name: 'test_compact_no_fal',
       args: [[10, 20, 30]],
       expected: [10, 20, 30] },
     { name: 'test_compact_empty',
